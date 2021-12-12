@@ -49,6 +49,6 @@ public class Account extends RepresentationModel<Account> {
 
     @ManyToOne
     @JoinColumn(name = "budget_id", nullable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Budget budget;
 }

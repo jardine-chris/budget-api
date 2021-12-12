@@ -29,9 +29,9 @@ public class Balance extends RepresentationModel<Balance> {
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
-    private BigDecimal clearedBalance;
-    private BigDecimal unclearedBalance;
-    private BigDecimal workingBalance;
+    private BigDecimal clearedBalance = new BigDecimal(0);
+    private BigDecimal unclearedBalance = new BigDecimal(0);
+    private BigDecimal workingBalance = new BigDecimal(0);
 
     @OneToOne(mappedBy = "balance")
     private Account account;

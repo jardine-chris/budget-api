@@ -1,6 +1,7 @@
 package com.keplux.budgetapi.services;
 
 import com.keplux.budgetapi.controllers.AccountController;
+import com.keplux.budgetapi.controllers.BudgetController;
 import com.keplux.budgetapi.entities.Account;
 import com.keplux.budgetapi.entities.Balance;
 import com.keplux.budgetapi.entities.Budget;
@@ -81,9 +82,11 @@ public class AccountService {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Budget> getAccountBudget(@PathVariable UUID accountId) {
         Budget budget = repository.getById(accountId).getBudget();
+        budget.add(linkTo(methodOn(BudgetController.class)
+                .getBudgetById(accountId))
+                .withSelfRel());
         budget.add(linkTo(methodOn(AccountController.class)
-                .getAccountBudget(accountId))
-                .withRel("budget"));
+                .getAccountById(accountId)).withRel("account"));
         return new ResponseEntity<>(budget, HttpStatus.OK);
     }
 
